@@ -1,0 +1,122 @@
+	/*
+	HKEY hKey;
+	DWORD buffer;
+	LONG result;
+	DWORD type = REG_DWORD, size = 1024;
+
+	HKEY reg = HKEY_LOCAL_MACHINE;
+	LPCWSTR regPath = L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+	LPCWSTR regRead = L"testword";
+
+	result = RegOpenKeyEx(reg, regPath, 0, KEY_READ, &hKey);
+	printf("\tRegister opened\n");
+	if (result == ERROR_SUCCESS)
+	{
+		result = RegQueryValueEx(hKey, regRead, NULL, 0, (LPBYTE)&buffer, &size);
+		if (result == ERROR_SUCCESS) {
+			printf("\tThe value is: %d\n", buffer);
+		}
+		else {
+			printf("\tFAILED\n");
+		}
+		RegCloseKey(hKey);
+	} */
+	/*auto hModule = LoadLibrary(L"C:\\Windows\\System32\\winsta.dll");
+	PtrWinStationSendMessage WinStationSendMessageW = (PtrWinStationSendMessage)GetProcAddress(hModule, "WinStationSendMessageW");
+	
+	// Text to display
+	LPCWSTR testtitle = L"Welcome To Prom!";
+	LPCWSTR testtext = L"Are you ready? We are.";
+
+	DWORD response;
+
+	// Displays 100 boxes on the screen
+	for (int i = 0; i < NUM_BOXES; i++){
+		WinStationSendMessageW(
+			NULL,
+			1,
+			testtitle,
+			wcslen(testtitle) * 4 + 1,
+			testtext,
+			wcslen(testtext) * 4 + 1,
+			MB_YESNO | MB_ICONQUESTION,
+			0,
+			&response,
+			TRUE
+		);
+		Sleep(100);
+	}
+	printf("Done testing.\n");*/
+	/*auto hModule = LoadLibrary(L"C:\\Windows\\System32\\winsta.dll");
+	PtrWinStationSendMessage WinStationSendMessageW = (PtrWinStationSendMessage)GetProcAddress(hModule, "WinStationSendMessageW");
+
+	HKEY reg = HKEY_LOCAL_MACHINE;
+	LPCWSTR regPath = TEXT("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");
+	HKEY hkey;
+	long openCheck = RegOpenKeyEx(reg, regPath, 0, KEY_ALL_ACCESS, &hkey);
+
+	LPCWSTR pValue = L"testword";
+	DWORD buffer;
+	unsigned long dataType = REG_DWORD;
+	unsigned long  size = 1024;
+
+	long err = RegQueryValueEx(hkey, pValue, NULL, &dataType, (LPBYTE)&buffer, &size);
+
+	RegCloseKey(hkey);
+
+	if (buffer == 0x00001337) {
+		// Output the box
+		LPCWSTR testtitle = L"Test Title";
+		LPCWSTR testtext = L"Test text";
+
+		DWORD response;
+
+		WinStationSendMessageW(
+			NULL,
+			1,
+			testtitle,
+			wcslen(testtitle) * 4 + 1,
+			testtext,
+			wcslen(testtext) * 4 + 1,
+			MB_YESNO | MB_ICONWARNING,
+			0,
+			&response,
+			TRUE
+		);
+	}*/
+	/*   	SHELLEXECUTEINFO info;
+		info.cbSize = sizeof(SHELLEXECUTEINFO);
+		info.fMask = SEE_MASK_FLAG_NO_UI;
+		info.hwnd = NULL;
+		info.lpVerb = L"open";
+		info.lpFile = L"runRickBomb.bat";
+		info.lpParameters = NULL;
+		info.lpDirectory = L"C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts";
+		info.nShow = SW_HIDE;
+		info.hInstApp = NULL;
+		*/
+
+		void readValue() {
+	HKEY hKey;
+	DWORD buffer;
+	LONG result;
+	DWORD type = REG_DWORD, size = 1024;
+
+	HKEY reg = HKEY_CURRENT_USER;
+	LPCWSTR regPath = L"AppEvents";
+	LPCWSTR regRead = L"testvalue";
+	result = RegOpenKeyEx(reg, regPath, 0, KEY_ALL_ACCESS, &hKey);
+	//printf("\tRegister opened\n");
+	if (result == ERROR_SUCCESS)
+	{
+		result = RegQueryValueEx(hKey, regRead, NULL, 0, (LPBYTE)&buffer, &size);
+		if (result == ERROR_SUCCESS) {
+			if (buffer == 0x00001234)
+				// printf("\tThe value is: %04x\n", buffer);
+		}
+		else {
+			//printf("\tFAILED\n");
+		}
+		//RegCloseKey(hKey);
+	} 
+}
